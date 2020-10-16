@@ -3,3 +3,5 @@ Lo que hacemos aqui desde la console es poder crear una lista de tareas por hace
 code app crear -d "Nueva tarea"
 code app actualizar -d "Nueva tarea"  -c  true
 code app borrar -d "Nueva tarea"
+
+code  app borrar --all     (New)  Borra todas tus tareas

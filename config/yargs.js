@@ -59,20 +59,39 @@ const completado =  {
  const opts = {
      descripcion : {
          alias : 'd',
-         demand : true,
+         demand : false,
          desc : 'Descripcion de la tarea por hacer'
      },
      completado : {
          alias : 'c',
          default     : true,
          desc : 'Marca como completado o pendiente la tarea'
+     },
+
+     all : {
+
+            desc : 'Borra todas las tareas'
+
      }
  }
+
+
+ const listarEstado = {
+
+    completado : {
+        alias : 'c',
+        desc : 'Filtra tareas completadas'
+    }
+
+  }
+
+
 
  const argv = require('yargs')
  .command('crear' , 'Crear un eleeto por hacer'.yellow , opts)
  .command('actualizar' , 'El estado completado de una tarea'.yellow , opts)
  .command( 'borrar', 'Borrara una tarea'.yellow , opts)
+ .command ( 'listar' , 'Muestra todas las tareas'.yellow , listarEstado )
  .help()
  .argv;
 

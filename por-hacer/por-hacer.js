@@ -1,4 +1,5 @@
 const { black } = require('colors/safe');
+var colorsDos = require('colors/safe');
 const fs = require('fs');
 const { array } = require('yargs');
 
@@ -69,12 +70,47 @@ const actualizar = ( descripcion , completado = true ) => {
     }
 }
 
+
+let listarTodo = ( lista ) => {
+
+    cargarBD();
+
+    if( lista === true || lista === 'true'){
+
+        listadoPorHacer.filter( x => {
+            if (x.completado === true) {
+                console.log('========== Por hacer ==========='.green);
+                console.log('Tarea: ',x.descripcion)
+                console.log('Estado:', colorsDos.cyan(x.completado))
+                console.log('================================='.green);
+            }
+        })
+        
+    }else if ( lista === false || lista === 'false' ){
+
+       listadoPorHacer.filter( x => {
+            if (x.completado === false) {
+                console.log('========== Por hacer ==========='.green);
+                console.log('Tarea: ', x.descripcion)
+                console.log('Estado:', colorsDos.red(x.completado))
+                console.log('================================='.green);
+            }
+        })
+        
+    }
+
+}
+ 
+
+
 let borrar = ( tarea ) => {
     cargarBD();
     let prueba = listadoPorHacer.findIndex( x => {
        return  x.descripcion === tarea ;
     });
 
+if( !true ){
+    
     if ( prueba === -1 ){
         console.log('La tarea no existe'.red)
     }else{
@@ -82,8 +118,19 @@ let borrar = ( tarea ) => {
         console.log('Tarea eliminada' . yellow); 
         guardarBD()
     }
+}
+}
 
 
+borrarTodo = ( dato ) => {
+
+    if( dato ){
+        console.log('bien');
+        cargarBD();
+        listadoPorHacer = [];
+        guardarBD()
+    }
+    
 }
  
 
@@ -93,6 +140,8 @@ module.exports = {
     getListado,
     actualizar,
     vacia,
-    borrar
+    borrar,
+    listarTodo,
+    borrarTodo
 }
 //Hasa aqui C. 43
